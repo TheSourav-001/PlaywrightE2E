@@ -3,6 +3,7 @@ import { BasePage } from "./basePage";
 export class Login extends BasePage {
     constructor(page) {
         super(page);
+        
         this.emailInputLocator = this.page.locator('#field-email');
         this.passwordInputLocator = this.page.locator('#field-password');
     }
