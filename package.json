@@ -1,0 +1,16 @@
+{
+  "name": "playwright",
+  "version": "1.0.0",
+  "description": "This is my first playwright project folder",
+  "license": "ISC",
+  "author": "Sourav Dipto Apu",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.60.0",
+    "allure-playwright": "^3.9.0"
+  }
+}

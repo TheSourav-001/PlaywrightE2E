@@ -1,0 +1,7 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","15459","TC01: Validate Registration with valid credentials","webkit","2026-05-26","passed","2026-05-26","Account page functionality test","Account\registration.spec.js","",""
+"","14982","TC01: Validate Registration with valid credentials","chromium","2026-05-26","passed","2026-05-26","Account page functionality test","Account\registration.spec.js","",""
+"","31921","TC0: Validate Registration without fullname","chromium","2026-05-26","passed","2026-05-26","Account page functionality test","Account\registration.spec.js","",""
+"","35259","TC0: Validate Registration without fullname","firefox","2026-05-26","passed","2026-05-26","Account page functionality test","Account\registration.spec.js","",""
+"","23161","TC0: Validate Registration without fullname","webkit","2026-05-26","passed","2026-05-26","Account page functionality test","Account\registration.spec.js","",""
+"","63087","TC01: Validate Registration with valid credentials","firefox","2026-05-26","passed","2026-05-26","Account page functionality test","Account\registration.spec.js","",""
