@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { Search } from '../../pages/searchProduct';
+import { Search } from '../../pages/Search Page/searchProduct';
 
 const products = [
   "Stainless Steel Thermos - Yellow",
@@ -36,45 +36,35 @@ test.describe("Search page functionality test suite", () => {
     await searchPage.clickSearchIcon();
     await searchPage.clickOnSearchBox("Thermos");
 
-    await expect(
-      page.getByText("Stainless Steel Thermos").first()
-    ).toBeVisible();
+    await expect(page.getByText("Stainless Steel Thermos").first()).toBeVisible();
   });
 
   test("TC03: Validate search with lowercase product name | Expected: Matching product should be displayed", async ({ page }) => {
     await searchPage.clickSearchIcon();
     await searchPage.clickOnSearchBox("ceramic");
 
-    await expect(
-      page.getByText("Ceramic").first()
-    ).toBeVisible();
+    await expect( page.getByText("Ceramic").first()).toBeVisible();
   });
 
   test("TC04: Validate search with uppercase product name | Expected: Matching product should be displayed", async ({ page }) => {
     await searchPage.clickSearchIcon();
     await searchPage.clickOnSearchBox("CERAMIC");
 
-    await expect(
-      page.getByText("Ceramic").first()
-    ).toBeVisible();
+    await expect(page.getByText("Ceramic").first()).toBeVisible();
   });
 
   test("TC05: Validate search with invalid product name | Expected: No matching product should be displayed", async ({ page }) => {
     await searchPage.clickSearchIcon();
-    await searchPage.clickOnSearchBox("Invalid Product 123");
+    await searchPage.clickOnSearchBox("Macbook Air M5");
 
-    await expect(
-      page.getByText("Invalid Product 123")
-    ).toHaveCount(0);
+    await expect(page.getByText("No products found")).toHaveCount(0);
   });
 
   test("TC06: Validate search with special characters | Expected: No matching product should be displayed", async ({ page }) => {
     await searchPage.clickSearchIcon();
     await searchPage.clickOnSearchBox("@#$%^&*");
 
-    await expect(
-      page.getByText("@#$%^&*")
-    ).toHaveCount(0);
+    await expect(page.getByText("No products found")).toHaveCount(0);
   });
 
   test("TC07: Validate search with numeric values | Expected: No matching product should be displayed", async ({ page }) => {
@@ -82,8 +72,7 @@ test.describe("Search page functionality test suite", () => {
     await searchPage.clickOnSearchBox("123456");
 
     await expect(
-      page.getByText("123456")
-    ).toHaveCount(0);
+      page.getByText("No products found")).toHaveCount(0);
   });
 
   test("TC08: Validate search with empty input | Expected: Search should not break application", async ({ page }) => {

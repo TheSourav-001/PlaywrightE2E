@@ -1,4 +1,4 @@
-import { BasePage } from "./basePage";
+import { BasePage } from "../basePage/basePage";
 
 export class Search extends BasePage{
     constructor (page){
