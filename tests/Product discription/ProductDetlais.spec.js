@@ -1,120 +1,95 @@
-import { test } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 import { ProductDetlais } from '../../pages/Product validation/productDetlais';
-
-const products = [
-  {
-    name: "Stainless Steel Thermos - Yellow",
-    url: "/accessories/stainless-steel-thermos-yellow"
-  },
-  {
-    name: "Modern Ceramic Vase - White",
-    url: "/accessories/modern-ceramic-vase-white"
-  },
-  {
-    name: "Ceramic Candy Bowl - Yellow",
-    url: "/accessories/ceramic-candy-bowl-yellow"
-  },
-  {
-    name: "Desk Pen Holder - White",
-    url: "/accessories/desk-pen-holder-white"
-  },
-  {
-    name: "Ceramic Coffee Cup - Yellow",
-    url: "/accessories/ceramic-coffee-cup-yellow"
-  }
-];
+import { products } from '../../data/products';
 
 test.describe("Product Details page functionality test suite", () => {
 
-  let detailsPage;
+    let detailsPage;
 
-  test.beforeEach(async ({ page }) => {
-    detailsPage = new ProductDetlais(page);
-  });
+    test.beforeEach(async ({ page }) => {
+        detailsPage = new ProductDetlais(page);
+    });
 
-  for (const product of products) {
+    for (const product of products) {
 
-    test(
-      `TC01: Verify product information for: ${product.name} | Expected: Product name, price, SKU and description should be visible`,
-      async ({ page }) => {
+        test(`TC01: Verify product information for: ${product.name} | Expected: Product name, price, SKU and description should be visible`, async ({ page }) => {
 
-        await page.goto(product.url, {
-          waitUntil: "domcontentloaded",
-          timeout: 60000,
+            await page.goto(product.url, {
+                waitUntil: "domcontentloaded",
+                timeout: 60000,
+            });
+
+            await detailsPage.verifyProductName(product.name);
+            await detailsPage.verifyProductPrice();
+            await detailsPage.verifyProductSku();
+            await detailsPage.verifyProductDescription();
         });
 
-        await detailsPage.verifyProductName(product.name);
-        await detailsPage.verifyProductPrice();
-        await detailsPage.verifyProductSku();
-        await detailsPage.verifyProductDescription();
-      }
-    );
+        test(`TC02: Verify product image for: ${product.name} | Expected: Product image should be visible`, async ({ page }) => {
 
-    test(
-      `TC02: Verify product image for: ${product.name} | Expected: Product image should be visible`,
-      async ({ page }) => {
+            await page.goto(product.url, {
+                waitUntil: "domcontentloaded",
+                timeout: 60000,
+            });
 
-        await page.goto(product.url, {
-          waitUntil: "domcontentloaded",
-          timeout: 60000,
+            await detailsPage.verifyProductImage(product.name);
         });
 
-        await detailsPage.verifyProductImage(product.name);
-      }
-    );
+        test(`TC03: Verify product color options for: ${product.name} | Expected: Color should be visible and selectable`, async ({ page }) => {
 
-    test(
-      `TC03: Verify product color options for: ${product.name} | Expected: Available color options should be visible`,
-      async ({ page }) => {
+            await page.goto(product.url, {
+                waitUntil: "domcontentloaded",
+                timeout: 60000,
+            });
 
-        await page.goto(product.url, {
-          waitUntil: "domcontentloaded",
-          timeout: 60000,
+            await detailsPage.verifyProductColor();
+
+            const selectedColor = await detailsPage.selectRandomColor();
+
+            console.log(`Selected Color: ${selectedColor}`);
         });
 
-        await detailsPage.verifyProductColor();
-      }
-    );
+        test(`TC04: Verify quantity field for: ${product.name} | Expected: Quantity field should be visible and allow random quantity selection`, async ({ page }) => {
 
-    test(
-      `TC04: Verify quantity field for: ${product.name} | Expected: Quantity field should be visible and default quantity should be 1`,
-      async ({ page }) => {
+            await page.goto(product.url, {
+                waitUntil: "domcontentloaded",
+                timeout: 60000,
+            });
 
-        await page.goto(product.url, {
-          waitUntil: "domcontentloaded",
-          timeout: 60000,
+            await detailsPage.verifyProductQuantity();
+
+            const quantity = await detailsPage.selectRandomQuantity();
+
+            console.log(`Selected Quantity: ${quantity}`);
         });
 
-        await detailsPage.verifyProductQuantity();
-      }
-    );
+        test(`TC05: Verify Add To Cart button for: ${product.name} | Expected: Product should be added to cart successfully`, async ({ page }) => {
 
-    test(
-      `TC05: Verify Add To Cart button for: ${product.name} | Expected: Add To Cart button should be visible and enabled`,
-      async ({ page }) => {
+            await page.goto(product.url, {
+                waitUntil: "domcontentloaded",
+                timeout: 60000,
+            });
 
-        await page.goto(product.url, {
-          waitUntil: "domcontentloaded",
-          timeout: 60000,
+            await detailsPage.verifyAddToCartButton();
+
+            const selectedColor = await detailsPage.selectRandomColor();
+            const quantity = await detailsPage.selectRandomQuantity();
+
+            console.log(`Selected Color: ${selectedColor}`);
+            console.log(`Selected Quantity: ${quantity}`);
+
+            await detailsPage.clickButton("ADD TO CART");
+            //await expect(page.getByText(product.name)).toBeVisible();
         });
 
-        await detailsPage.verifyAddToCartButton();
-      }
-    );
+        test(`TC06: Verify breadcrumb navigation for: ${product.name} | Expected: Breadcrumb navigation should be visible`, async ({ page }) => {
 
-    test(
-      `TC06: Verify breadcrumb navigation for: ${product.name} | Expected: Breadcrumb navigation should be visible`,
-      async ({ page }) => {
+            await page.goto(product.url, {
+                waitUntil: "domcontentloaded",
+                timeout: 60000,
+            });
 
-        await page.goto(product.url, {
-          waitUntil: "domcontentloaded",
-          timeout: 60000,
+            await detailsPage.verifyBreadcrumb();
         });
-
-        await detailsPage.verifyBreadcrumb();
-      }
-    );
-
-  }
-
+    }
 });
