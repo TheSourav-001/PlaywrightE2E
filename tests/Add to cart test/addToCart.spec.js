@@ -1,4 +1,4 @@
-import { test } from "allure-playwright";
+import { test, expect } from "@playwright/test";
 import { Addtocart } from "../../pages/Add to cart/addToCart";
 
 test.describe("Add To Cart page functionality test suite", () => {

@@ -1,5 +1,5 @@
-import { test, expect } from '@playwright/test';
-import { Login } from "../../pages/login.js";
+import { test, expect } from "@playwright/test";
+import { Login } from "../../pages/login Page/login";
 test.use({ storageState: { cookies: [], origins: [] } });
 
 const registerEmail = "thisemailfortestingpurpose@gmail.com";

@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { Account } from "../../pages/account.page.js";
+import { Account } from '../../pages/Registration page/account.page';
 test.use({ storageState: { cookies: [], origins: [] } });
 
 const fullname = "Sourav Dipto Apu";

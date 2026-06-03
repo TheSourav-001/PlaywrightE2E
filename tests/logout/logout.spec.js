@@ -43,7 +43,7 @@ test.describe("Logout functionality test suite", () => {
         });
 
         await test.step("TC08: Verify account icon is visible after logout | Expected: Account icon should still be visible on home page", async () => {
-            await expect(page.locator('a[href*="/account/login"]')).toBeVisible();
+            await expect(page.locator('a[href="/account/login"]')).toBeVisible();
         });
 
         await test.step("TC06: Verify user cannot directly access account page after logout | Expected: Should redirect to login page", async () => {
